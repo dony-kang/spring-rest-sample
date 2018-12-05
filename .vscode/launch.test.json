@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "spring_rest_sample",
+                "projectName": "spring_rest_sample",
+                "workingDirectory": "c:\\workspace\\spring-work\\spring_rest_sample",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "spring_rest_sample",
+                "projectName": "spring_rest_sample",
+                "workingDirectory": "c:\\workspace\\spring-work\\spring_rest_sample",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class BookDao {
@@ -39,6 +40,13 @@ public class BookDao {
         int updateCnt = sqlSession.update("book.update", book);
         if (updateCnt != 0)
             System.out.println("update a record.");
+    }
+
+    @Transactional
+    public Book create(Book book) {
+        sqlSession.insert("book.create", book);
+
+        return book;
     }
 
 }

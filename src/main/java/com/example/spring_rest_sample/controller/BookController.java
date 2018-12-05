@@ -1,5 +1,6 @@
 package com.example.spring_rest_sample.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 
 @Api(description = "RESTFull webservice")
 @RestController
@@ -45,6 +48,17 @@ public class BookController {
             throw new BookNotFoundException("id : " + id);
 
         return book;
+    }
+
+    @ApiOperation(value = "새 책 등록")
+    @ApiResponse(code = 201, message = "created")
+    @RequestMapping(value = "/books", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE })
+    public ResponseEntity<Object> createBook(@RequestBody Book book) {
+        Book rsBook = bookDao.create(book);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(rsBook.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
 
     @ApiOperation(value = "책 삭제 by Id")
