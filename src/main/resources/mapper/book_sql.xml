@@ -3,6 +3,10 @@
 <mapper namespace="book">
 
 	<!-- user 목록 -->
+	<select id="findAll" resultType="map">
+		select id, description, path, price, publishdate, title from book
+	</select>
+
 	<select id="findById" parameterType="long" resultType="com.example.spring_rest_sample.dao.Book">
 		select id, description, path, price, publishdate, title from book where id=#{id}
 	</select>
