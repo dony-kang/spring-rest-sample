@@ -3,7 +3,24 @@
 <mapper namespace="book">
 
 	<!-- user 목록 -->
-	<select id="findAll" parameterType="map" resultType="map">
-		select * from book
+	<select id="findById" parameterType="long" resultType="com.example.spring_rest_sample.dao.Book">
+		select id, description, path, price, publishdate, title from book where id=#{id}
 	</select>
+
+	<update id="delete" parameterType="long">
+		delete from book where id = #{id}
+	</update>
+
+	<update id="update" parameterType="com.example.spring_rest_sample.dao.Book">
+		update book 
+		<set>
+			<if test="description != null"> description = #{description}, </if>
+			<if test="path != null"> path = #{path}, </if>
+			<if test="price != null"> price = #{price}, </if>
+			<if test="publishdate != null"> publishdate = now(), </if>
+			<if test="title != null"> title = #{title}, </if>
+		</set>
+		where id = #{id}
+	</update>
+
 </mapper>
