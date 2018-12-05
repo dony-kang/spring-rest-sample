@@ -11,6 +11,15 @@
 		select id, description, path, price, publishdate, title from book where id=#{id}
 	</select>
 
+	<insert id="create" useGeneratedKeys="true" parameterType="com.example.spring_rest_sample.dao.Book">
+		insert into book (description, path, price, publishdate, title)
+		          values (#{description}, #{path}, #{price}, now(), #{title})
+
+		<selectKey order="AFTER" keyProperty="id" resultType="long">
+        select last_insert_id()
+        </selectKey>		  
+	</insert>
+
 	<update id="delete" parameterType="long">
 		delete from book where id = #{id}
 	</update>

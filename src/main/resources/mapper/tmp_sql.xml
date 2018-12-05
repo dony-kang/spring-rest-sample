@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tmp">
+
+    <insert id="save" parameterType="map"  useGeneratedKeys="true" >
+        insert into tmp_tbl(name) values (#{name})
+      
+        <selectKey order="AFTER" keyProperty="id" resultType="int">
+        select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <select id="maxId" resultType="int">
+        select max(id) as id from tmp_tbl
+    </select>
+</mapper>
